@@ -3,7 +3,7 @@ import { FETCH_START, FETCH_SUCCESS, FETCH_ERROR, ADD_SMURF, SET_ERROR} from "..
 export const initialState = {
     smurfs:[],
     isLoading:false,
-    error:''
+    errorMessage:''
 }
 
 const reducer = (state=initialState,action)=>{
@@ -13,32 +13,29 @@ const reducer = (state=initialState,action)=>{
             return ({ 
                 ...state,
                 isLoading:true,
-                error:''
             });
         
         case(FETCH_SUCCESS):
             return ({
                 ...state,
                 isLoading:false,
-                smurfs: action.payload,
-                error:''
+                smurfs: action.payload
             });
         case(FETCH_ERROR):
             return ({
                 ...state,
                 isLoading:false,
-                error:action.payload
+                errorMessage:action.payload
             });
         case(ADD_SMURF):
             return ({
                 ...state,
                 smurfs:[...state.smurfs,action.payload],
-                error:''
             });
         case(SET_ERROR):
             return ({
                 ...state,
-                error:"Must fill out all fields"
+                errorMessage:action.payload
             });
 
         

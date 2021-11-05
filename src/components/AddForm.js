@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {setError, addSmurf} from './../actions';
 
 const AddForm = (props) => {
- const {error} = props;
 
     const [state, setState] = useState({
         name:"",
@@ -23,8 +22,10 @@ const AddForm = (props) => {
 
     const handleSubmit = e => {
         e.preventDefault();
+        props.setError('')
         if (state.name === "" || state.position === "" || state.nickname === "") {
-            props.setError(error) 
+
+            props.setError("Must fill in all Fields") 
         }else{
             props.addSmurf(state)
         }
@@ -51,7 +52,7 @@ const AddForm = (props) => {
                 <textarea onChange={handleChange} value={state.description} name="description" id="description" />
             </div>
             {
-                error && <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {error}</div>
+                props.errorMessage && <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {props.errorMessage}</div>
             }
             <button>Submit Smurf</button>
         </form>
@@ -59,7 +60,7 @@ const AddForm = (props) => {
 }
 const mapStateToProps = state =>{
     return{
-        error: state.error
+        errorMessage: state.errorMessage
     }
 }
 

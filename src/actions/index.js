@@ -36,10 +36,13 @@ export const fetchSuccess = (item) => {
     return({type: FETCH_SUCCESS, payload: item});
 }
 
-export const setError = (errorMessage) => {
+export const fetchError = (errorMessage) => {
     return ({type: FETCH_ERROR, payload: errorMessage});
 }
 export const addSmurf = (smurfs) => {
     return ({type: ADD_SMURF, payload: smurfs});
+}
+export const setError = (smurfs) => {
+    return ({type: SET_ERROR, payload: smurfs});
 }
 
